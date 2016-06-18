@@ -7,11 +7,9 @@ function StringCalculator() {
         }
         var nums = numbers.split(' ');
         if (nums.length > 1) {
-            var sum = 0;
-            nums.forEach(function(i) {
-                sum += Number(i);
-            });
-            return sum;
+            return nums.reduce(function(total, currentNumber) {
+                return total + Number(currentNumber);
+            }, 0);
         }
         return Number(numbers);
     };
