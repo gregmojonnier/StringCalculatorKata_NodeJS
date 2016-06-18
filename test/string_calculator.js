@@ -9,7 +9,7 @@ test('StringCalculator.Constructor', function(t) {
 	t.end();
 });
 
-test('StringCalculator.Sum', function(t) {
+test('StringCalculator.Sum - Correctness', function(t) {
     var calc = new Calculator();
 
 	t.isEqual(calc.sum(''), 0, 'an empty string equals 0');
@@ -18,8 +18,18 @@ test('StringCalculator.Sum', function(t) {
 	t.isEqual(calc.sum('1 8 10'), 19, 'three space delimited numbers equals their sum');
 	t.isEqual(calc.sum('1,8,10'), 19, 'three comma delimited numbers equals their sum');
 	t.isEqual(calc.sum('1\n8\n10'), 19, 'three new line delimited numbers equals their sum');
+	t.isEqual(calc.sum('1 1000 1'), 1002, 'correctly sums a string containing a very large number');
+    t.end();
+});
+
+test('StringCalculator.Sum - Quirks', function(t) {
+    var calc = new Calculator();
+
 	t.throws(function() {
         calc.sum('4 -10');
-        }, 'throws exception when asked to sum negative numbers');
+        }, 'throws an exception when asked to sum negative numbers');
+    t.throws(function() {
+        calc.sum('1 1001');
+    }, 'throws an exception when asked to sum numbers > 1000');
 	t.end();
 });

@@ -40,6 +40,8 @@ function verifyAndReturnNumber(stringNumber) {
     var number = Number(stringNumber);
     if (number < 0) {
         throw 'StringCalculator does not support negative numbers!';
+    } else if (number > 1000) {
+        throw 'StringCalculator does not support numbers > 1000!';
     }
     return number;
 }
