@@ -9,9 +9,19 @@ function StringCalculator() {
         }
 
         var allowedDelimiters = legalDelimiters.slice();
-        if (numbers.startsWith('//')) {
+        var customDelimiter;
+        var numbersStartIdx;
+
+        if (numbers.startsWith('//[') && numbers.includes(']', 3)) {
+            numbersStartIdx = numbers.indexOf(']') + 1;
+            customDelimiter = numbers.slice(3, numbersStartIdx - 1);
+        } else if (numbers.startsWith('//')) {
+            numbersStartIdx = 3;
             customDelimiter = numbers[2];
-            numbers = numbers.slice(3);
+        }
+
+        if (customDelimiter) {
+            numbers = numbers.slice(numbersStartIdx);
             allowedDelimiters.unshift(customDelimiter);
         }
 
