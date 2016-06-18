@@ -1,6 +1,6 @@
 module.exports = function() {
-	return new Cat;
+	return new StringCalculator;
 };
 
-function Cat () {
+function StringCalculator() {
 }

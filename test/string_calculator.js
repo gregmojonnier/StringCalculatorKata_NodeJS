@@ -1,10 +1,10 @@
 var test = require('tape');
-var calculator = require('../src/string_calculator');
+var Calculator = require('../src/string_calculator');
 
-test('Constructing string calculators', function (t) {
-	var calc1 = new calculator();
-	var calc2 = new calculator();
+test('StringCalculator.Constructor', function(t) {
+	var calc1 = Calculator();
+	var calc2 = Calculator();
 
-	t.isNotEqual(calc1, calc2, 'each calculator is a unique instance')
+	t.isNotEqual(calc1, calc2, 'each calculator is a unique instance');
 	t.end();
 });
