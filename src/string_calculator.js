@@ -9,20 +9,10 @@ function StringCalculator() {
         }
 
         var allowedDelimiters = legalDelimiters.slice();
-        var customDelimiter;
-        var numbersStartIdx;
-
-        if (numbers.startsWith('//[') && numbers.includes(']', 3)) {
-            numbersStartIdx = numbers.indexOf(']') + 1;
-            customDelimiter = numbers.slice(3, numbersStartIdx - 1);
-        } else if (numbers.startsWith('//')) {
-            numbersStartIdx = 3;
-            customDelimiter = numbers[2];
-        }
-
-        if (customDelimiter) {
-            numbers = numbers.slice(numbersStartIdx);
-            allowedDelimiters.unshift(customDelimiter);
+        var customDelimiterInfo = parseCustomDelimiterInformation(numbers);
+        if (customDelimiterInfo) {
+            numbers = numbers.slice(customDelimiterInfo.numbersStartIdx);
+            allowedDelimiters.unshift(customDelimiterInfo.customDelimiter);
         }
 
         var sum = splitAndSumByFirstLegalDelimiter(numbers, allowedDelimiters);
@@ -63,4 +53,24 @@ function verifyAndReturnNumber(stringNumber) {
         throw 'StringCalculator does not support numbers > 1000!';
     }
     return number;
+}
+
+function parseCustomDelimiterInformation(numbers) {
+    if (!numbers) {
+        return undefined;
+    }
+    var customInfo = {};
+
+    if (numbers.startsWith('//[') && numbers.includes(']', 3)) {
+        var closingBracketIdx = numbers.indexOf(']');
+        customInfo.numbersStartIdx = closingBracketIdx + 1;
+        customInfo.customDelimiter = numbers.slice(3, closingBracketIdx);
+    } else if (numbers.startsWith('//')) {
+        customInfo.numbersStartIdx = 3;
+        customInfo.customDelimiter = numbers[2];
+    } else {
+        return undefined;
+    }
+
+    return customInfo;
 }
