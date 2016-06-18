@@ -3,6 +3,12 @@ module.exports = StringCalculator;
 var legalDelimiters = [' ', ',', '\n'];
 
 function StringCalculator() {
+    /**
+     * Sums a delimited string of numbers.
+     *      Look at unit tests for a behavior overview.
+     * @param {string} numbers A string of delimited numbers.
+     * @return {number} The sum of the numbers in the string, using the first delimiter that works.
+     */
     this.sum = function(numbers) {
         if (!numbers) {
             return 0;
@@ -24,6 +30,13 @@ function StringCalculator() {
     };
 }
 
+/**
+ * Finds the sum of a delimited string of numbers using the first delimiter
+ *      that works from the specified array of legal delimiters
+ * @param {string} numbers A string of delimited numbers.
+ * @param {string[]} legalDelimiters An array of legal delimiters.
+ * @return {number|undefined} The sum of the first legal delimiter possible to split.
+ */
 function splitAndSumByFirstLegalDelimiter(numbers, legalDelimiters) {
     for (var i in legalDelimiters) {
         var sum = splitAndSum(numbers, legalDelimiters[i]);
@@ -34,6 +47,12 @@ function splitAndSumByFirstLegalDelimiter(numbers, legalDelimiters) {
     return undefined;
 }
 
+/**
+ * Splits and sums a delimited string of numbers by a delimiter.
+ * @param {string} numbers A string of delimited numbers.
+ * @param {string} delimiter A delimiter to split with.
+ * @return {number|undefined} The sum when able to split.
+ */
 function splitAndSum(numbers, delimiter) {
     var nums = numbers.split(delimiter);
     if (nums.length > 1) {
@@ -45,6 +64,12 @@ function splitAndSum(numbers, delimiter) {
     }
 }
 
+/**
+ * Converts a string into a number and then validates it.
+ * @param {string} stringNumber A string of a single number.
+ * @return {number} Return stringNumber as a number.
+ * @throws Will throw when given negative numbers or > 1000.
+ */
 function verifyAndReturnNumber(stringNumber) {
     var number = Number(stringNumber);
     if (number < 0) {
@@ -55,6 +80,12 @@ function verifyAndReturnNumber(stringNumber) {
     return number;
 }
 
+/**
+ * Parses custom delimiter information out of a number string into an object.
+ * @param {string} numbers A string of delimited numbers, possibly with
+ *      a custom delimiter specified at the start.
+ * @return {Object} Returns an object with the custom delimiter and actual start index.
+ */
 function parseCustomDelimiterInformation(numbers) {
     if (!numbers) {
         return undefined;
