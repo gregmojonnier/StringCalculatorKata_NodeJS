@@ -1,12 +1,21 @@
 module.exports = StringCalculator;
 
+var legalDelimiters = [' ', ',', '\n'];
+
 function StringCalculator() {
     this.sum = function(numbers) {
         if (!numbers) {
             return 0;
         }
 
-        var sum = splitAndSumByFirstLegalDelimiter(numbers, [' ', ',', '\n']);
+        var allowedDelimiters = legalDelimiters.slice();
+        if (numbers.startsWith('//')) {
+            customDelimiter = numbers[2];
+            numbers = numbers.slice(3);
+            allowedDelimiters.unshift(customDelimiter);
+        }
+
+        var sum = splitAndSumByFirstLegalDelimiter(numbers, allowedDelimiters);
         if (sum) {
             return sum;
         } else {

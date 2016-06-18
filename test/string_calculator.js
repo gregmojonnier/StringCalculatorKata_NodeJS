@@ -33,3 +33,13 @@ test('StringCalculator.Sum - Quirks', function(t) {
     }, 'throws an exception when asked to sum numbers > 1000');
 	t.end();
 });
+
+test('StringCalculator.Sum - Custom Delimiter', function(t) {
+    var calc = new Calculator();
+
+    var result = calc.sum('//#2#2#2#2');
+	t.isEqual(result, 8, 'a single char delimiter can be defined at the start with //');
+    t.isEqual(calc.sum('//#2'), 2, 'a single number with a custom delimiter equals itself');
+    t.isEqual(calc.sum('//#'), 0, 'an empty string with a custom delimiter equals zero');
+	t.end();
+});
