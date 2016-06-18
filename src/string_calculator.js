@@ -6,19 +6,26 @@ function StringCalculator() {
             return 0;
         }
 
-        var legalDelimieters = [' ', ',', '\n'];
-        for (var i in legalDelimieters) {
-            var sum = splitByDelimiterAndSum(numbers, legalDelimieters[i]);
-            if (sum) {
-                return sum;
-            }
+        var sum = splitAndSumByFirstLegalDelimiter(numbers, [' ', ',', '\n']);
+        if (sum) {
+            return sum;
+        } else {
+            return Number(numbers);
         }
-
-        return Number(numbers);
     };
 }
 
-function splitByDelimiterAndSum(numbers, delimiter) {
+function splitAndSumByFirstLegalDelimiter(numbers, legalDelimiters) {
+    for (var i in legalDelimiters) {
+        var sum = splitAndSum(numbers, legalDelimiters[i]);
+        if (sum) {
+            return sum;
+        }
+    }
+    return undefined;
+}
+
+function splitAndSum(numbers, delimiter) {
     var nums = numbers.split(delimiter);
     if (nums.length > 1) {
         return nums.reduce(function(total, currentNumber) {
