@@ -6,7 +6,7 @@ function StringCalculator() {
             return 0;
         }
 
-        var legalDelimieters = [' ', ','];
+        var legalDelimieters = [' ', ',', '\n'];
         for (var i in legalDelimieters) {
             var sum = splitByDelimiterAndSum(numbers, legalDelimieters[i]);
             if (sum) {
