@@ -18,5 +18,8 @@ test('StringCalculator.Sum', function(t) {
 	t.isEqual(calc.sum('1 8 10'), 19, 'three space delimited numbers equals their sum');
 	t.isEqual(calc.sum('1,8,10'), 19, 'three comma delimited numbers equals their sum');
 	t.isEqual(calc.sum('1\n8\n10'), 19, 'three new line delimited numbers equals their sum');
+	t.throws(function() {
+        calc.sum('4 -10');
+        }, 'throws exception when asked to sum negative numbers');
 	t.end();
 });

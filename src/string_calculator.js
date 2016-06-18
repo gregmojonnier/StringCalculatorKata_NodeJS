@@ -10,7 +10,7 @@ function StringCalculator() {
         if (sum) {
             return sum;
         } else {
-            return Number(numbers);
+            return verifyAndReturnNumber(numbers);
         }
     };
 }
@@ -29,9 +29,17 @@ function splitAndSum(numbers, delimiter) {
     var nums = numbers.split(delimiter);
     if (nums.length > 1) {
         return nums.reduce(function(total, currentNumber) {
-            return total + Number(currentNumber);
+            return total + verifyAndReturnNumber(currentNumber);
         }, 0);
     } else {
         return undefined;
     }
+}
+
+function verifyAndReturnNumber(stringNumber) {
+    var number = Number(stringNumber);
+    if (number < 0) {
+        throw 'StringCalculator does not support negative numbers!';
+    }
+    return number;
 }
