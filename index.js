@@ -1,4 +1,5 @@
 var program = require('commander');
+var string_calculator = require('./src/string_calculator');
 
 program
     .version('1.0.0')
@@ -8,7 +9,9 @@ program
 
 if (program.sum_numbers) {
         console.log('Ready to start summing!');
-        console.log(program.sum_numbers);
+        var calculator = new string_calculator();
+        var result = calculator.sum(program.sum_numbers);
+        console.log('The sum of', '"' + program.sum_numbers + '"', 'is', result);
 } else {
     console.log('Only capable of summing numbers at the moment.');
 }
